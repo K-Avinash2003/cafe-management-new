@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block contant %}
+<div align="center">
+    <br><br><br>
+    <h1>Update Reservation</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Update Reservation</button>
+    </form>
+    <a href="{% url 'tables' %}" class="btn btn-secondary">Back to Reservations</a>
+    <br><br><br>
+</div>
+{% endblock %}

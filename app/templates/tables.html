@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block contant %}
+{% include "navbar.html" %}
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Add Coffee Menu Item.....</h1>
+        </div>
+    </div>
+</header>
+<div align="center">
+    <br><br><br>
+    <h1>Reserved Tables</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Table</th>
+                <th>Reservation Time</th>
+                <th>Is Reserved</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reservation in reservations %}
+            <tr>
+                <td>{{ reservation.user.username }}</td>
+                <td>{{ reservation.table }}</td>
+                <td>{{ reservation.reservation_time }}</td>
+                <td>{{ reservation.is_reserved }}</td>
+                <td>
+                    <a href="{% url 'update_reservation' reservation.id %}" class="btn btn-warning">Update</a>
+                    <form action="{% url 'delete_reservations' reservation.id %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'table_list' %}" class="btn btn-secondary">Back to Tables</a>
+    <br><br><br>
+</div>
+{% endblock %}
+
+

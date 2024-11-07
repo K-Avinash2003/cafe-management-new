@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block contant %}
+{% include "navbar.html" %}
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Available Tables.....</h1>
+        </div>
+    </div>
+</header>
+<div align="center">
+    <br><br><br>
+ 
+<h1>Available Tables</h1>
+<ul>
+    {% for table in tables %}
+      {% if not table.id in reserved_tables %}
+        
+     
+        <li style="list-style-type: none;">{{ table }} - Available</li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+<a href="{% url 'make_reservation' %}" class="btn btn-primary">Make a Reservation</a>
+<a href="{% url 'reservation_list' %}" class="btn btn-primary">My Reservation</a>
+
+
+<br><br><br>
+<div>
+{% endblock %}

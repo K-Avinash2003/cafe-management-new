@@ -1,0 +1,105 @@
+
+{% extends "base.html" %}
+{% block contant %}
+{% include "navbar.html" %}
+
+<head>
+    
+    <title>Bill for Order {{ order.id }}</title>
+    <div class="container px-4 px-lg-5 my-5">
+    </div>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color:lightblue;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .bill-container {
+            max-width: 800px;
+            margin: 0 auto;
+            border: 1px solid #000;
+            padding: 20px;
+            background-color:white;
+        }
+        .bill-header, .bill-footer {
+            text-align: center;
+        }
+        .bill-header p {
+            margin: 5px 0;
+        }
+        .bill-items {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .bill-items th, .bill-items td {
+            border: 1px solid #000;
+            padding: 10px;
+            text-align: left;
+        }
+        .bill-items th {
+            background-color: white;
+        }
+        .print-button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        @media print {
+            .print-button {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bill-container">
+        <div class="bill-header">
+            <h1 style="font:bold;">Bill for Order {{ order.id }}</h1>
+            <h3>User: {{ order.user.username }}</h3>
+            <p>Date: {{ order.created_at }}</p>
+        </div>
+        <h2>Items</h2>
+        <table class="bill-items">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price Each</th>
+                    <th>Total Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items_with_total %}
+                    <tr>
+                        <td>{{ item.product.name }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.product.price }}</td>
+                        <td>{{ item.total_price }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <br>
+    
+        <h2>Total Price: {{ order.total_price }}</h2>
+        <div class="bill-footer">
+            <button class="print-button" onclick="window.print()">Print Bill</button>
+        </div>
+    </div>
+
+    <br><br>
+</body>
+
+{% endblock%}

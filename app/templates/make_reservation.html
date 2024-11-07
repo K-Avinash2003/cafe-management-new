@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block contant %}
+{% include "navbar.html" %}
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Make Reservation.....</h1>
+        </div>
+    </div>
+</header>
+<div align="center">
+    <br>
+    <h1>Make a Reservation</h1>
+<form action="{% url "make_reservation" %}" method="post">
+    {% csrf_token %}
+    <tr>
+        <th><label for="id_table">Table:</label></th>
+        <td>
+    
+          <select name="table" required id="id_table">
+            {% for table in tables %}
+            {% if not table.id in reserved_tables %}
+            <option value="{{table.id}}">{{ table }}</option>
+            {% endif %}
+          {% endfor %}
+    
+
+    </select>
+        </td>
+      </tr>
+      <br><br>
+      <tr>
+        <th><label for="id_reservation_time">Reservation time:</label></th>
+        <td>
+          <input type="datetime-local" name="reservation_time" required id="id_reservation_time">
+        </td>
+      </tr>
+      
+      <br><br>
+    <button type="submit" class="btn btn-primary">Reserve</button>
+</form>
+<br><br>
+<a href="{% url 'table_list' %}" class="btn btn-secondary">Back to Tables</a>
+<br><br><br>
+<div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block contant %}
+{% include "navbar.html" %}
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">ABOUT US.....</h1>
+        </div>
+    </div>
+</header>
+<section class="container py-5" align="center">
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="{{product.image.url}}" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{product.name}}</h5>
+              <p class="card-text">{{product.description}}</p>
+              <h5 class="card-title">{{product.price}}</h5>
+              {% if product.is_sales %}
+              <strike>
+                {{product.price}}
+                </strike>
+                &nbsp;
+                {{product.sales_price}}
+              {% endif %}
+              <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/index/">Home</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+</section>
+{% endblock  %}

@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block contant %}
+{% include "navbar.html" %}
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Add Coffee Menu Item.....</h1>
+        </div>
+    </div>
+</header>
+<body>
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 mt-2">
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+    <form action="{% url 'search_items' %}" method="get" class="navbar-form">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search products..." name="q">
+            <button type="submit" class="btn btn-outline-secondary">Search</button>
+        </div>
+    </form>
+    <br><br><br>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Item No</th>
+        <th scope="col">Image</th>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Status</th>
+
+      </tr>
+    </thead>
+    <tbody>
+        {% for item in coffeemenu_items %}
+            <tr>
+                <th scope="row">{{ item.id }}</th>
+                <td> <img src="{{ item.image.url }}" alt="{{ item.name }}" style="width: 100px; height: 100px;"></td>
+                <td>{{ item.name }}</td>
+                <td>Price: {{ item.price }}</td>
+                
+                <td>
+                {% if item.available %}
+                    Available
+                {% else %}
+                    NOT Available
+                {% endif %}
+                </td>
+                <td>
+                    <form action="{% url 'toggle_availability' item.id %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-warning">
+                            {% if item.available %}
+                                Mark as Not Available
+                            {% else %}
+                                Mark as Available
+                            {% endif %}
+                        </button>
+                    </form>
+                </td>
+                <td>
+                    <a class="btn btn-primary" href="{% url 'delete_item' item.id %}">Delete</a>
+                </td>
+                <td>
+                    <a class="btn btn-primary" href="{% url 'update_item' item.id %}">Update</a>
+                </td>
+            </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+</div>
+</section>
+
+  <body>
+    {% endblock %}

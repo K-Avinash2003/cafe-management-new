@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block contant %}
+{% include "navbar.html" %}
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">User Lists.....</h1>
+        </div>
+    </div>
+</header>
+<body>
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                <form action="{% url 'search_orders' %}" method="get" class="navbar-form">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search  by order Id..." name="q">
+                        <button type="submit" class="btn btn-outline-secondary">Search</button>
+                    </div>
+                </form>
+                <br><br>
+                <br>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Username</th>
+            <th>Is Admin</th>
+            <th>Is Customer</th>
+            <th>Is Employee</th>
+            <th scope="col">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ user.username }}</td>
+            <td>{% if user.is_admin %}
+                Admin
+            {% else %}
+                -----
+            {% endif %}</td>
+            <td>{% if user.is_customer %}
+                Customer
+            {% else %}
+                -----
+            {% endif %}</td>
+            <td>{% if user.is_employee %}
+                Employee
+            {% else %}
+                -----
+            {% endif %}</td>
+            <td>
+                <a class="btn btn-primary" href="{% url 'delete_user' user.id %}">Delete</a>
+            </td>
+            <td>
+                <a class="btn btn-primary" href="{% url 'update_user' user.id %}">update</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</body>
+{% endblock %}

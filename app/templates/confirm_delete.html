@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block contant %}
+    <div align="center">
+        <br><br><br>
+        <h1>Confirm Deletion</h1>
+        <p>Are you sure you want to delete the reservation for {{ reservation.table }} at {{ reservation.reservation_time }}?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Confirm Delete</button>
+            <a href="{% url 'tables' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+        <br><br><br>
+    </div>
+{% endblock %}

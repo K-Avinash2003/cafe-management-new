@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% block contant %}
+<style>
+    /* Initial button styles */
+    .color-button {
+            background-color: blue;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        /* Button styles when the "clicked" class is added */
+        .color-button.clicked {
+            background-color: green;
+        }
+
+        /* Input field styles */
+        .input-field {
+            display: block;
+            margin-top: 5px;
+            padding: 5px;
+            font-size: 14px;
+        }</style>
+    <body>
+        <!-- Navigation-->
+        {% include "navbar.html" %}
+        <!-- Header-->
+        <header class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">COFFEE DAY......</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">Orders...... </p>
+                </div>
+            </div>
+        </header>
+        <!-- Section-->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    <form action="{% url 'search_order' %}" method="get" class="navbar-form">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search  by order Id..." name="q">
+                            <button type="submit" class="btn btn-outline-secondary">Search</button>
+                        </div>
+                    </form>
+                    <br><br>
+                    <br>
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Order No</th>
+                            <th scope="col">User Name</th>
+                            <th scope="col">Item Name</th>
+                            <th scope="col">OrderItems</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Status</th>
+
+                          </tr>
+                        </thead>
+                        <tbody>
+                            {% for order in orders %}
+                            {% for order_item in order.orderitem_set.all %}
+                                <tr>
+                                    <th scope="row">{{ order.id }}</th>
+                                    <td>{{ order.user.username }}</td>
+                                    <td>{{ order_item.product.name }}</td>
+                                    <td>{{ order_item.quantity }}</td>
+                                    <td>{{ order_item.product.price }}</td>
+                                    <td>
+                                        {% if order_item.status %}
+                                            <span class="text-success">Done</span>
+                                        {% else %}
+                                            <span class="text-warning">Pending</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <form method="POST" action="{% url 'toggle_status' %}">
+                                            {% csrf_token %}
+                                        <button class="btn btn-primary" type="submit" name="order_item_id" value="{{ order_item.id }}">Done</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% endfor %}
+                        </tbody>
+                      </table>
+                    
+                      <script>
+                         function changeColorAndPlaceholder(inputFieldId, button) {
+            // Get the input field element by its ID
+            var inputField = document.getElementById(inputFieldId);
+
+            // Toggle the "clicked" class to change the button color
+            button.classList.toggle('clicked');
+
+            // Change the placeholder text of the input field
+            if (button.classList.contains('clicked')) {
+                inputField.placeholder = 'Done';
+            } else {
+                inputField.placeholder = 'Not Done';
+            }
+        }
+
+        
+    function changeColorAndPlaceholder(inputFieldId, button) {
+        // Get the input field element by its ID
+        var inputField = document.getElementById(inputFieldId);
+
+        // Toggle the "clicked" class to change the button color
+        button.classList.toggle('clicked');
+
+        // Change the placeholder text of the input field
+        if (button.classList.contains('clicked')) {
+            inputField.placeholder = 'Done';
+        } else {
+            inputField.placeholder = 'Not Done';
+        }
+    }
+</script>
+                  
+                   
+                   </div>
+        </section>
+
+        <!-- Footer-->
+        {% endblock  %}
+   

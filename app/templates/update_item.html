@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block contant %}
+{% include "navbar.html" %}
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Update Menu item......</h1>
+        </div>
+    </div>
+</header>
+<body>
+    <section class="py-5 text-center">
+        <h2>Update Menu item</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a class="btn btn-secondary" href="{% url 'items' %}">Cancel</a>
+        </form>
+    </div>
+</section>
+</body>
+{% endblock %}

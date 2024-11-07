@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block contant %}
+{% include "navbar.html" %}
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Your Reservations.....</h1>
+        </div>
+    </div>
+</header>
+<div align="center">
+    <br><br><br>
+    <h1>Your Reservations</h1>
+    <ul>
+        {% for reservation in reservations %}
+            <li style="list-style-type: none;">{{ reservation.table }} at {{ reservation.reservation_time }} 
+                <form action="{% url 'delete_reservation' reservation.id %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </li><br>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'table_list' %}" class="btn btn-secondary">Back to Tables</a>
+    
+ <br><br><br>
+<div>
+{% endblock %}

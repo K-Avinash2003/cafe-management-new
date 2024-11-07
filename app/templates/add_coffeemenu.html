@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block contant %}
+{% include "navbar.html" %}
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Add Coffee Menu Item.....</h1>
+        </div>
+    </div>
+</header>
+<body>
+    <section class="py-5 text-center">
+    <h1>Add Coffee Menu Item</h1>
+    <br>
+    <form method="post" class="d-inline-block" enctype="multipart/form-data" align="center">
+        {% csrf_token %}
+        <table>
+        {{ form.as_table }}
+        </table>
+        <br>
+        <button type="submit">Add Item</button>
+    </form>
+    <section>
+</body>
+{% endblock %}

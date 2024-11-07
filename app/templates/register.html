@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block contant %}
+{% include "navbar.html" %}
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Register your Account</h1>
+        </div>
+    </div>
+</header>
+<section class="py-5 text-center">
+    <form class="d-inline-block" action="/register/" method="POST">
+        {% csrf_token %} 
+         <table>
+            {{form.as_table}}
+         </table>
+         <button type="submit" class="btn btn-primary">Register</button>
+     </form>
+</section>
+
+{% endblock  %}

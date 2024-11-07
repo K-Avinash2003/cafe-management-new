@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block contant %}
+    <body>
+        <!-- Navigation-->
+        {% include "navbar.html" %}
+        <!-- Header-->
+        <header class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">COFFEE DAY......</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">Admin Page..... </p>
+                </div>
+            </div>
+        </header>
+        <!-- Section-->
+        <section class="py-5">
+          <div class="container px-4 px-lg-5 mt-5">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-6 justify-content-center">
+                  
+              <div class="col mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">ADD USERS</h5>
+                        <br><br>
+                        <a class="btn btn-primary" href="/add_user/">Add Users</a>
+                    </div>
+                </div>
+            </div>
+
+                 
+            <div class="col mb-4">
+              <div class="card h-100">
+                  <div class="card-body text-center">
+                      <h5 class="card-title">View Users</h5>
+                      <br><br>
+                      <a class="btn btn-primary" href="/user_list/">View Users</a>
+                  </div>
+              </div>
+          </div>
+
+          <div class="col mb-4">
+              <div class="card h-100">
+                  <div class="card-body text-center">
+                      <h5 class="card-title">Add Menu Item</h5>
+                      <br><br>
+                      <a class="btn btn-primary" href="{% url 'add_coffeemenu' %}">Add Item</a>
+                  </div>
+              </div>
+          </div>
+
+          <div class="col mb-4">
+              <div class="card h-100">
+                  <div class="card-body text-center">
+                      <h5 class="card-title">Coffee Menu Item</h5>
+                      <br>
+                      <a class="btn btn-primary" href="{% url 'items' %}"> Menu Item</a>
+                  </div>
+              </div>
+          </div>
+
+          <div class="col mb-4">
+              <div class="card h-100">
+                  <div class="card-body text-center">
+                      <h5 class="card-title">Bills</h5>
+                      <br><br>
+                      <a class="btn btn-primary" href="{% url 'orders' %}">Bills</a>
+                  </div>
+              </div>
+          </div>
+
+          <div class="col mb-4">
+              <div class="card h-100">
+                  <div class="card-body text-center">
+                      <h5 class="card-title">Orders</h5>
+                      <br><br>
+                      <a class="btn btn-primary" href="{% url 'item_orders' %}">Orders</a>
+                  </div>
+              </div>
+          </div>
+
+                
+                </div>
+                   </div>
+        </section>
+
+        <!-- Footer-->
+        {% endblock  %}
+   

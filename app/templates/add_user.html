@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% block contant %}
+{% include "navbar.html" %}
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Add Users......</h1>
+        </div>
+    </div>
+</header>
+<body>
+    <section class="py-5 text-center">
+    <h1>Add User</h1>
+    <br>
+    <form class="d-inline-block" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <br>
+        <button type="submit">Add User</button>
+    </form>
+    </section>
+</body>
+{% endblock %}

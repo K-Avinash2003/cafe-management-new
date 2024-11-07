@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block contant %}
+    <!-- Navigation-->
+    {% include "navbar.html" %}
+    <header class="bg-dark py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">Your Order Id......</h1>
+            </div>
+        </div>
+    </header>
+<body align="center">
+    <h1 align="center"> Your Order Placed Successfully</h1>
+
+<br><br>
+    <h1 align="center" style="color:red;">Order ID: {{ order.id }}</h1>
+    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+        <div class="text-center mt-4">
+            <a class="btn btn-outline-dark" href="{% url 'index' %}">Continue Shopping</a>
+        </div>
+         <h1 align="center">OR</h1>
+         <div class="text-center mt-4">
+            <a class="btn btn-outline-dark" href="{% url 'logout' %}">Logout</a>
+        </div>
+        
+    </div>
+</body>
+{% endblock %}
+
