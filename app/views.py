@@ -1,6 +1,5 @@
 from ast import parse
 import datetime
-import parser
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import get_object_or_404, redirect, render
 
